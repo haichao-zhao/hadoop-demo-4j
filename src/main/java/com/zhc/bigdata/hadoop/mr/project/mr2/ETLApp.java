@@ -44,7 +44,7 @@ public class ETLApp {
 
         //设置输入输出路径
         Path outpath = new Path(args[1]);
-        FileUtils.FileExistsParser(conf, outpath);
+        outpath.getFileSystem(conf).delete(outpath, true);
 
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, outpath);
@@ -75,9 +75,9 @@ public class ETLApp {
             String sessionId = logInfo.get("sessionId");
             String time = logInfo.get("time");
             String country = logInfo.get("country") == null ? "-" : logInfo.get("country");
-            String province = logInfo.get("province")== null ? "-" : logInfo.get("province");
-            String city = logInfo.get("city")== null ? "-" : logInfo.get("city");
-            String pageId = GetPageId.getPageId(url)== "" ? "-" : GetPageId.getPageId(url);
+            String province = logInfo.get("province") == null ? "-" : logInfo.get("province");
+            String city = logInfo.get("city") == null ? "-" : logInfo.get("city");
+            String pageId = GetPageId.getPageId(url) == "" ? "-" : GetPageId.getPageId(url);
 
             StringBuilder builder = new StringBuilder();
             builder.append(ip).append("\t");
